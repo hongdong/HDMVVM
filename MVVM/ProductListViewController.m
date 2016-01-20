@@ -1,16 +1,10 @@
-//
-//  ViewController.m
-//  MVVM
-//
-//  Created by develop on 15/9/17.
-//  Copyright (c) 2015年 songhailiang. All rights reserved.
-//
 
 #import "ProductListViewController.h"
 #import "APIClient.h"
 #import "ProductListViewModel.h"
 #import <MJRefresh/MJRefresh.h>
 #import "ProductListCell.h"
+#import "MacroHeader.h"
 
 @interface ProductListViewController ()
 
@@ -26,8 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
     [self setupViewUI];
     [self initViewModel];
     [self bindViewModel];
@@ -35,7 +27,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UI
@@ -43,16 +34,23 @@
 - (void)setupViewUI {
     
     self.title = @"产品列表";
-    self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
-    self.table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    WS(weakSelf)
+    self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf.viewModel.fetchProductCommand execute:nil];
+    }];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
+    self.table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf.viewModel.fetchMoreProductCommand execute:nil];
+    }];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
 }
 
 - (void)initViewModel {
     
     _viewModel = [ProductListViewModel new];
     @weakify(self)
+    //这个command是否在执行
     [_viewModel.fetchProductCommand.executing subscribeNext:^(NSNumber *executing) {
         NSLog(@"command executing:%@", executing);
         if (!executing.boolValue) {
@@ -93,17 +91,6 @@
     
     //没有更多数据时，隐藏table的footer
     RAC(self.table.mj_footer, hidden) = [self.viewModel.hasMoreData not];
-}
-
-#pragma mark - View Method
-
-- (void)loadData {
-    
-    [self.viewModel.fetchProductCommand execute:nil];
-}
-
-- (void)loadMoreData {
-    [self.viewModel.fetchMoreProductCommand execute:nil];
 }
 
 #pragma mark - UITableViewDataSource

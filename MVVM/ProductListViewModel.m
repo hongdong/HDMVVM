@@ -1,10 +1,3 @@
-//
-//  ProductListViewModel.m
-//  MVVM
-//
-//  Created by develop on 15/9/17.
-//  Copyright (c) 2015年 songhailiang. All rights reserved.
-//
 
 #import "ProductListViewModel.h"
 
@@ -30,14 +23,14 @@
 
 - (void)initCommand {
     
-    _fetchProductCommand = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    _fetchProductCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         
         return [[[APIClient sharedClient]
                  fetchProductWithPageIndex:@(1)]
                  takeUntil:self.cancelCommand.executionSignals];
     }];
     
-    _fetchMoreProductCommand = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    _fetchMoreProductCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [[[APIClient sharedClient] fetchProductWithPageIndex:@(self.page.PageIndex+1)] takeUntil:self.cancelCommand.executionSignals];
     }];
     
@@ -58,7 +51,7 @@
             [self.errors sendNext:response.error];
         }
         else {
-            self.items = [ProductListModel objectArrayWithKeyValuesArray:response.data];
+            self.items = [ProductListModel mj_objectArrayWithKeyValuesArray:response.data];
             self.page = response.page;
         }
     }];
@@ -70,7 +63,7 @@
         }
         else {
             NSMutableArray *arr = [NSMutableArray arrayWithArray:self.items];
-            [arr addObjectsFromArray:[ProductListModel objectArrayWithKeyValuesArray:response.data]];
+            [arr addObjectsFromArray:[ProductListModel mj_objectArrayWithKeyValuesArray:response.data]];
             self.items = arr;
             self.page = response.page;
         }
