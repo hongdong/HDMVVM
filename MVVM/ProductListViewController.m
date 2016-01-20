@@ -43,8 +43,8 @@
 - (void)setupViewUI {
     
     self.title = @"产品列表";
-    self.table.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
-    self.table.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    self.table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
 }
@@ -57,20 +57,20 @@
         NSLog(@"command executing:%@", executing);
         if (!executing.boolValue) {
             @strongify(self)
-            [self.table.header endRefreshing];
+            [self.table.mj_header endRefreshing];
         }
     }];
     
     [_viewModel.fetchMoreProductCommand.executing subscribeNext:^(NSNumber *executing) {
         if (!executing.boolValue) {
             @strongify(self);
-            [self.table.footer endRefreshing];
+            [self.table.mj_footer endRefreshing];
         }
     }];
     
     [_viewModel.errors subscribeNext:^(NSError *error) {
-        ResponseData *data = [ResponseData objectWithKeyValues:error.userInfo];
-        NSLog(@"something error:%@", data.keyValues);
+        ResponseData *data = [ResponseData mj_objectWithKeyValues:error.userInfo];
+        NSLog(@"something error:%@", data.mj_keyValues);
         //TODO: 这里可以选择一种合适的方式将错误信息展示出来
     }];
     
@@ -92,7 +92,7 @@
     }];
     
     //没有更多数据时，隐藏table的footer
-    RAC(self.table.footer, hidden) = [self.viewModel.hasMoreData not];
+    RAC(self.table.mj_footer, hidden) = [self.viewModel.hasMoreData not];
 }
 
 #pragma mark - View Method

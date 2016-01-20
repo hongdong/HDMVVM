@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A164C7CEA9119BB5994760B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9966E804F0E86BACBB783275 /* libPods.a */; };
 		7EC7E40C56975FCD4F47A1AC /* libPods-MVVM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3938D9536E302A7BF37956 /* libPods-MVVM.a */; };
-		BA2F7C201BB4F252008A92B8 /* ProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7C1F1BB4F252008A92B8 /* ProductListModel.m */; settings = {ASSET_TAGS = (); }; };
-		BA32ED4D1BB29FF000B8AB0C /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32ED4C1BB29FF000B8AB0C /* BaseViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		BA2F7C201BB4F252008A92B8 /* ProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7C1F1BB4F252008A92B8 /* ProductListModel.m */; };
+		BA32ED4D1BB29FF000B8AB0C /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA32ED4C1BB29FF000B8AB0C /* BaseViewModel.m */; };
 		BAED5DD41BABA89F00317741 /* ProductListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAED5DD31BABA89F00317741 /* ProductListCell.m */; };
 		BAED5DD71BABA96700317741 /* ProductListCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BAED5DD61BABA96700317741 /* ProductListCellViewModel.m */; };
-		BAFD2BE21BB90FC700A3A52A /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFD2BE11BB90FC700A3A52A /* Page.m */; settings = {ASSET_TAGS = (); }; };
+		BAFD2BE21BB90FC700A3A52A /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFD2BE11BB90FC700A3A52A /* Page.m */; };
 		BAFEF8E61BAAA2B600E91C28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFEF8E51BAAA2B600E91C28 /* main.m */; };
 		BAFEF8E91BAAA2B600E91C28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFEF8E81BAAA2B600E91C28 /* AppDelegate.m */; };
 		BAFEF8EC1BAAA2B600E91C28 /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFEF8EB1BAAA2B600E91C28 /* ProductListViewController.m */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		7F7B12DC47551F6462071852 /* Pods-MVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVVM/Pods-MVVM.debug.xcconfig"; sourceTree = "<group>"; };
+		9966E804F0E86BACBB783275 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2F7C1E1BB4F251008A92B8 /* ProductListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductListModel.h; sourceTree = "<group>"; };
 		BA2F7C1F1BB4F252008A92B8 /* ProductListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductListModel.m; sourceTree = "<group>"; };
 		BA32ED4B1BB29FF000B8AB0C /* BaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewModel.h; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC7E40C56975FCD4F47A1AC /* libPods-MVVM.a in Frameworks */,
+				1A164C7CEA9119BB5994760B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				EE3938D9536E302A7BF37956 /* libPods-MVVM.a */,
+				9966E804F0E86BACBB783275 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -256,6 +260,7 @@
 				BAFEF8DD1BAAA2B600E91C28 /* Frameworks */,
 				BAFEF8DE1BAAA2B600E91C28 /* Resources */,
 				FA59BC7BCDB250C02DED36E2 /* Copy Pods Resources */,
+				ED81E9FC499B8E0D5E114A88 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -357,6 +362,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		ED81E9FC499B8E0D5E114A88 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FA59BC7BCDB250C02DED36E2 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,7 +389,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MVVM/Pods-MVVM-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
